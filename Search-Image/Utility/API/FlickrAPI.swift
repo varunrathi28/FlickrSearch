@@ -46,7 +46,8 @@ class FlickerAPI{
     
     class func searchPhotosForKeywords(input:String,pageNo: Int, completionBlock:@escaping (PhotoRequestBaseResponse?,Error?)-> Void)->URLSessionTask?{
         
-        let urlStr = ""
+        // TODO:- logic for creating url from query text and page id
+        let urlStr = "https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=\(APIKey.REST_API_KEY)&format=json&nojsoncallback=1&safe_search=1&text=\(input)&page=\(pageNo)"
         
         guard let url = URL(string: urlStr) else {
             return nil

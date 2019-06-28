@@ -19,5 +19,31 @@ class FlickerImageCell: UICollectionViewCell {
     }
     
     
+    func configureImage(with model:FlickrPhotoModel?){
+        
+        activityIndicator.startAnimating()
+        if let model = model {
+            self.activityIndicator.isHidden = false
+            FlickerAPI.fetchPhoto(from: model) { (image, error) in
+                
+                self.activityIndicator.stopAnimating()
+                self.activityIndicator.isHidden = true
+                
+                guard let image = image else {
+                    return
+                }
+                
+                self.flickrImage.image = image
+                
+            }
+        }
+    }
+    
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        self.activityIndicator.isHidden = true
+        flickrImage.image = nil
+    }
     
 }
