@@ -10,5 +10,5 @@ import Foundation
 
 
 public struct APIKey {
-    let key = ""
+    let REST_API_KEY = ""
 }
