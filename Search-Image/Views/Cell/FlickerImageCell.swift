@@ -15,7 +15,7 @@ class FlickerImageCell: UICollectionViewCell {
     
     
     class var reuseIdentifier: String {
-        return NSStringFromClass(FlickerImageCell.self)
+            return String(describing:FlickerImageCell.self)
     }
     
     
