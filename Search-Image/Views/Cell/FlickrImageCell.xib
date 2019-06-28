@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="FlickerImageCell" id="PMe-hs-wrg" customClass="FlickerImageCell" customModule="Search_Image" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="86" height="74"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                <rect key="frame" x="0.0" y="0.0" width="86" height="74"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ogV-XD-tVr">
+                        <rect key="frame" x="0.0" y="0.0" width="86" height="74"/>
+                    </imageView>
+                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="96I-lx-4s1">
+                        <rect key="frame" x="33" y="27" width="20" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="20" id="027-J6-aI4"/>
+                            <constraint firstAttribute="width" constant="20" id="tbX-Kq-5Qb"/>
+                        </constraints>
+                    </activityIndicatorView>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="ogV-XD-tVr" secondAttribute="trailing" id="DNF-pN-DY2"/>
+                <constraint firstItem="ogV-XD-tVr" firstAttribute="leading" secondItem="PMe-hs-wrg" secondAttribute="leading" id="Ky3-h0-tYC"/>
+                <constraint firstAttribute="bottom" secondItem="ogV-XD-tVr" secondAttribute="bottom" id="M5Q-38-uJZ"/>
+                <constraint firstItem="96I-lx-4s1" firstAttribute="centerY" secondItem="ogV-XD-tVr" secondAttribute="centerY" id="Wdh-d3-A1s"/>
+                <constraint firstItem="96I-lx-4s1" firstAttribute="centerX" secondItem="ogV-XD-tVr" secondAttribute="centerX" id="muV-eT-Db7"/>
+                <constraint firstItem="ogV-XD-tVr" firstAttribute="top" secondItem="PMe-hs-wrg" secondAttribute="top" id="vaT-6b-H0t"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="7IF-sN-pLm"/>
+            <size key="customSize" width="86" height="74"/>
+            <connections>
+                <outlet property="activityIndicator" destination="96I-lx-4s1" id="hEe-pp-knm"/>
+                <outlet property="flickrImage" destination="ogV-XD-tVr" id="ljx-bl-urD"/>
+            </connections>
+            <point key="canvasLocation" x="158.40000000000001" y="53.973013493253376"/>
+        </collectionViewCell>
+    </objects>
+</document>
