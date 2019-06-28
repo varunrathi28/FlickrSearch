@@ -98,16 +98,49 @@ class ImageSearchController: UIViewController {
     
 }
 
-extension ImageSearchController:UICollectionViewDataSource {
+//MARK: CollectionView Methods
+
+extension ImageSearchController:UICollectionViewDataSource,UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        return UICollectionViewCell()
+    
+    let cell = collectionView.dequeueReusableCell(withReuseIdentifier:FlickerImageCell.reuseIdentifier, for: indexPath) as! FlickerImageCell
+        let model = datasource[indexPath.row]
+        cell.configureImage(with: model)
+        return cell
     }
     
-
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return datasource.count
     }
-
+    
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+    
+        let width =  (UIScreen.main.bounds.size.width)/3 - 10
+        return CGSize(width: width , height: width)
+    }
 }
 
+
+extension ImageSearchController:UITextFieldDelegate{
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+    
+    
+        if let text = textField.text, let range = Range(range, in: text) {
+            let fullText = text.replacingCharacters(in: range, with: string)
+            
+            if fullText.count > 0 {
+                    searchPhotos(for: fullText)
+            }
+        }
+    
+        return true
+    }
+    
+}
 

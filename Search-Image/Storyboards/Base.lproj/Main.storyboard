@@ -49,6 +49,9 @@
                                             <constraint firstAttribute="width" constant="50" id="kfB-L5-e9W"/>
                                         </constraints>
                                         <state key="normal" title="Search"/>
+                                        <connections>
+                                            <action selector="searchButtonClickedWith:" destination="BYZ-38-t0r" eventType="touchUpInside" id="77d-hF-pOM"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
