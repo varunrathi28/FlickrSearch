@@ -12,10 +12,10 @@ class FlickerAPI{
 
 
     // To fetch singe photo
-    class func fetchPhoto(from photoModel:FlickrPhotoModel, completionBlock: @escaping (UIImage?,Error?)->Void){
+    class func fetchPhoto(from photoModel:FlickrPhotoModel, completionBlock: @escaping (UIImage?,Error?)->Void)->URLSessionTask?{
         
         guard let url = photoModel.photoURL else {
-            return
+            return nil
         }
         
         let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
@@ -39,6 +39,7 @@ class FlickerAPI{
             }
         }
         task.resume()
+        return task
     }
 
 
