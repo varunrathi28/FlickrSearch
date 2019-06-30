@@ -34,11 +34,26 @@ class FlickerImageCell: UICollectionViewCell {
                 }
                 
                 self.flickrImage.image = image
-                
             }
         }
     }
     
+     //MARK: Image Caching
+
+    func fetchImageFromCache(for url:String)->UIImage?{
+    
+    let delegate = UIApplication.shared.delegate as! AppDelegate
+   
+        if let image = delegate.imageCache.object(forKey: url as NSString){
+            return image
+        }
+        return nil
+    }
+    
+    func setCachedImage(image:UIImage, for url:String){
+        let delegate = UIApplication.shared.delegate as! AppDelegate
+        delegate.imageCache.setObject(image, forKey: url as NSString)
+    }
     
     override func prepareForReuse() {
         super.prepareForReuse()
