@@ -9,7 +9,7 @@
 import UIKit
 
 class ImageSearchController: UIViewController {
-
+    
     //MARK: Outlets
     @IBOutlet weak var collectionView:UICollectionView!
     @IBOutlet weak var textfield:UITextField!
@@ -20,8 +20,14 @@ class ImageSearchController: UIViewController {
     //MARK: Variables
     
     var currentRequest:URLSessionTask?
-    var currentPage = 1
+    var PAGE_NO = 1
+    var PAGINATION_OFFSET = 30
     var datasource:[FlickrPhotoModel] = []
+    var lastQuery:String?
+    var total_pages = 2
+    
+    //MARK: View Methods
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpViews()
@@ -31,17 +37,18 @@ class ImageSearchController: UIViewController {
     func setUpViews(){
         setupCollectionView()
         registerNib()
-    
+        
     }
     
     func setupCollectionView(){
-    
+        
+        collectionView.prefetchDataSource = self
         collectionView.delegate = self
         collectionView.dataSource = self
         textfield.delegate = self
     }
     
-   func registerNib(){
+    func registerNib(){
         let cellNib = UINib.init(nibName:"FlickrImageCell", bundle: nil)
         collectionView.register(cellNib, forCellWithReuseIdentifier:FlickerImageCell.reuseIdentifier)
     }
@@ -50,28 +57,29 @@ class ImageSearchController: UIViewController {
     @IBAction func searchButtonClicked(with sender:UIButton){
         
         // If no input-> return
-        guard let query  = textfield.text else {
+        guard let query  = textfield.text, textfield.text != lastQuery else {
             return
         }
         
         
-        // If already requests are going on, cancel them all
-        if (currentRequest != nil){
-            currentRequest?.cancel()
-        }
-    
-        //collectionView.reloadData()
-        searchPhotos(for: query)
+        // If already requests are going on, cancel them alll
+        currentRequest?.cancel()
+        datasource = []
+        
+        PAGE_NO = 1
+        searchPhotos(for: query,page:PAGE_NO)
         
     }
     
-    func searchPhotos(for query:String){
+    func searchPhotos(for query:String,page:Int, isPagination:Bool = false){
         
         guard query.count > 0 else {
             return
         }
         
-        currentRequest = FlickerAPI.searchPhotosForKeywords(input: query, pageNo: currentPage, completionBlock: { (response, error) in
+        lastQuery = query
+        
+        currentRequest = FlickerAPI.searchPhotosForKeywords(input: query, pageNo: page, completionBlock: { (response, error) in
             
             guard let response  = response else {
                 
@@ -79,22 +87,54 @@ class ImageSearchController: UIViewController {
                 return
             }
             
-            if self.currentPage == 1 {
-                self.datasource.removeAll()
-            }
-            
-            self.updateDataSource(models: response.photos.photo)
+            self.updateDataSource(with:response.photos)
+            self.currentRequest = nil
         })
         
     }
     
-    func updateDataSource(models:[FlickrPhotoModel]) {
-    
-        datasource.append(contentsOf: models)
-        DispatchQueue.main.async {
-            self.collectionView.reloadData()
+    func updateDataSource(with response:PhotoReqestResponse?) {
+        
+        
+        guard let photoResponse = response else {
+            return
+        }
+        // Update current page
+        PAGE_NO = photoResponse.page
+        total_pages = photoResponse.pages
+        
+        let photos = photoResponse.photo
+        
+        if photoResponse.page > 1{
+            
+            let datasourceCount = datasource.count
+            let indexPathsToUpdate = photos.enumerated().map { (offset,photoModel) -> IndexPath in
+                IndexPath(item: datasourceCount + offset, section: 0)
+            }
+            
+            
+            
+            DispatchQueue.main.async {
+                self.datasource.append(contentsOf: photos)
+                self.collectionView.performBatchUpdates({
+                    self.collectionView.insertItems(at: indexPathsToUpdate)
+                    
+                }, completion: nil)
+            }
+            
+        } else {
+            datasource = photos
+            DispatchQueue.main.async {
+                self.collectionView.reloadData()
+            }
+            
         }
     }
+    
+    func prefetchImages(for indexes:[IndexPath]){
+    
+    }
+    
     
 }
 
@@ -120,8 +160,30 @@ extension ImageSearchController:UICollectionViewDataSource,UICollectionViewDeleg
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
     
-        let width =  (UIScreen.main.bounds.size.width)/3 - 10
+        let width =  (UIScreen.main.bounds.size.width)/3 - 8
         return CGSize(width: width , height: width)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        let prefetchingRange = datasource.count - PAGINATION_OFFSET
+    
+        if  (prefetchingRange ... datasource.count - 1) ~= indexPath.row{
+            
+            if let lastQuery = lastQuery, currentRequest == nil, PAGE_NO < total_pages  {
+            
+                searchPhotos(for: lastQuery, page:PAGE_NO + 1)
+            }
+            
+        }
+}
+    
+    
+}
+
+extension ImageSearchController: UICollectionViewDataSourcePrefetching {
+
+     func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
+        print("Prefetching : \(indexPaths)")
     }
 }
 
@@ -134,8 +196,9 @@ extension ImageSearchController:UITextFieldDelegate{
         if let text = textField.text, let range = Range(range, in: text) {
             let fullText = text.replacingCharacters(in: range, with: string)
             
-            if fullText.count > 0 {
-                    searchPhotos(for: fullText)
+            if fullText.count > 2 && fullText != lastQuery && currentRequest == nil {
+                    PAGE_NO = 1
+                    searchPhotos(for: fullText, page:PAGE_NO)
             }
         }
     

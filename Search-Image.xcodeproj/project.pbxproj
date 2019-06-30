@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8B75E48022C9092D0016C340 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B75E47F22C9092D0016C340 /* Extension.swift */; };
+		8B75E48222C90BC80016C340 /* ImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B75E48122C90BC80016C340 /* ImageService.swift */; };
 		8BB632BF22C6051E00D03617 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB632BE22C6051E00D03617 /* AppDelegate.swift */; };
 		8BB632C422C6051E00D03617 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8BB632C222C6051E00D03617 /* Main.storyboard */; };
 		8BB632C622C6052000D03617 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8BB632C522C6052000D03617 /* Assets.xcassets */; };
@@ -20,6 +22,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8B75E47F22C9092D0016C340 /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
+		8B75E48122C90BC80016C340 /* ImageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageService.swift; sourceTree = "<group>"; };
 		8BB632BB22C6051E00D03617 /* Search-Image.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Search-Image.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8BB632BE22C6051E00D03617 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8BB632C322C6051E00D03617 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -97,6 +101,8 @@
 			isa = PBXGroup;
 			children = (
 				8BB632DB22C606FA00D03617 /* API */,
+				8B75E47F22C9092D0016C340 /* Extension.swift */,
+				8B75E48122C90BC80016C340 /* ImageService.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -240,7 +246,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				8BB632E822C6088F00D03617 /* ImageSearchController.swift in Sources */,
+				8B75E48222C90BC80016C340 /* ImageService.swift in Sources */,
 				8BB632E622C6079B00D03617 /* FlickerImageCell.swift in Sources */,
+				8B75E48022C9092D0016C340 /* Extension.swift in Sources */,
 				8BB632EA22C60C0300D03617 /* API.swift in Sources */,
 				8BB632BF22C6051E00D03617 /* AppDelegate.swift in Sources */,
 				8BB632EC22C60C3700D03617 /* FlickrAPI.swift in Sources */,

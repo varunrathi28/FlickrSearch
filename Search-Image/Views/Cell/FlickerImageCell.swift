@@ -26,38 +26,29 @@ class FlickerImageCell: UICollectionViewCell {
     func configureImage(with model:FlickrPhotoModel?){
         currentReqest?.cancel()
         
+        activityIndicator.isHidden = false
         activityIndicator.startAnimating()
+        
         if let model = model {
-            self.activityIndicator.isHidden = false
-          currentReqest =  FlickerAPI.fetchPhoto(from: model) { (image, error) in
+            
+            // Use the cached image
+            
+            DispatchQueue.global().async {
                 
-                self.activityIndicator.stopAnimating()
-                self.activityIndicator.isHidden = true
-                
-                guard let image = image else {
-                    return
-                }
-                
-                self.flickrImage.image = image
+                self.currentReqest = ImageDownloader.downloadImage(for: model, completionHandler: {[weak self] (downloadedImage) -> (Void) in
+                    
+                    withExtendedLifetime(self) {
+                        self!.currentReqest = nil
+                        self!.activityIndicator.isHidden = true
+                        self!.activityIndicator.stopAnimating()
+                        
+                        if let image = downloadedImage {
+                            self!.flickrImage.image = image
+                        }
+                    }
+                })
             }
         }
-    }
-    
-     //MARK: Image Caching
-
-    func fetchImageFromCache(for url:String)->UIImage?{
-    
-    let delegate = UIApplication.shared.delegate as! AppDelegate
-   
-        if let image = delegate.imageCache.object(forKey: url as NSString){
-            return image
-        }
-        return nil
-    }
-    
-    func setCachedImage(image:UIImage, for url:String){
-        let delegate = UIApplication.shared.delegate as! AppDelegate
-        delegate.imageCache.setObject(image, forKey: url as NSString)
     }
     
     override func prepareForReuse() {

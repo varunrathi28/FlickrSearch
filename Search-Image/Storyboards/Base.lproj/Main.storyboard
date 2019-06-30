@@ -20,7 +20,7 @@
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Ve0-74-XEm">
                                 <rect key="frame" x="0.0" y="90" width="375" height="577"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" red="0.58188301320000002" green="0.21569153669999999" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="IeT-xT-gNR">
                                     <size key="itemSize" width="50" height="50"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -37,29 +37,34 @@
                                 <rect key="frame" x="0.0" y="30" width="375" height="60"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ptP-b0-O2H">
-                                        <rect key="frame" x="8" y="15" width="301" height="30"/>
+                                        <rect key="frame" x="8" y="10" width="291" height="40"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y2m-oS-j8I">
-                                        <rect key="frame" x="317" y="5" width="50" height="50"/>
+                                        <rect key="frame" x="307" y="5" width="60" height="50"/>
+                                        <color key="backgroundColor" red="0.0" green="0.58980089430000004" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="Yjg-N5-FQ5"/>
-                                            <constraint firstAttribute="width" constant="50" id="kfB-L5-e9W"/>
+                                            <constraint firstAttribute="width" constant="60" id="kfB-L5-e9W"/>
                                         </constraints>
-                                        <state key="normal" title="Search"/>
+                                        <state key="normal" title="Search">
+                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
                                         <connections>
                                             <action selector="searchButtonClickedWith:" destination="BYZ-38-t0r" eventType="touchUpInside" id="77d-hF-pOM"/>
                                         </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" red="0.58188301320000002" green="0.21569153669999999" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstItem="ptP-b0-O2H" firstAttribute="leading" secondItem="X7f-MG-ftV" secondAttribute="leading" constant="8" id="41i-JQ-e4U"/>
                                     <constraint firstItem="Y2m-oS-j8I" firstAttribute="leading" secondItem="ptP-b0-O2H" secondAttribute="trailing" constant="8" id="Dlu-zQ-Rbd"/>
+                                    <constraint firstAttribute="bottom" secondItem="ptP-b0-O2H" secondAttribute="bottom" constant="10" id="JV6-0D-l2J"/>
                                     <constraint firstItem="ptP-b0-O2H" firstAttribute="centerY" secondItem="X7f-MG-ftV" secondAttribute="centerY" id="Vx4-1V-xXv"/>
                                     <constraint firstItem="Y2m-oS-j8I" firstAttribute="centerY" secondItem="X7f-MG-ftV" secondAttribute="centerY" id="jgn-U9-6j3"/>
+                                    <constraint firstItem="ptP-b0-O2H" firstAttribute="top" secondItem="X7f-MG-ftV" secondAttribute="top" constant="10" id="oXr-Rn-wSG"/>
                                     <constraint firstAttribute="trailing" secondItem="Y2m-oS-j8I" secondAttribute="trailing" constant="8" id="uwb-ix-MC8"/>
                                     <constraint firstAttribute="height" constant="60" id="w2X-S6-F7F"/>
                                 </constraints>
