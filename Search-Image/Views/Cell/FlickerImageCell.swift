@@ -10,8 +10,12 @@ import UIKit
 
 class FlickerImageCell: UICollectionViewCell {
     
+    //MARK: Outlets
     @IBOutlet weak var flickrImage:UIImageView!
     @IBOutlet weak var activityIndicator:UIActivityIndicatorView!
+    
+    //MARK: variables
+    var currentReqest:URLSessionTask?
     
     
     class var reuseIdentifier: String {
@@ -20,11 +24,12 @@ class FlickerImageCell: UICollectionViewCell {
     
     
     func configureImage(with model:FlickrPhotoModel?){
+        currentReqest?.cancel()
         
         activityIndicator.startAnimating()
         if let model = model {
             self.activityIndicator.isHidden = false
-            FlickerAPI.fetchPhoto(from: model) { (image, error) in
+          currentReqest =  FlickerAPI.fetchPhoto(from: model) { (image, error) in
                 
                 self.activityIndicator.stopAnimating()
                 self.activityIndicator.isHidden = true
@@ -59,6 +64,7 @@ class FlickerImageCell: UICollectionViewCell {
         super.prepareForReuse()
         self.activityIndicator.isHidden = true
         flickrImage.image = nil
+        currentReqest?.cancel()
     }
     
 }
