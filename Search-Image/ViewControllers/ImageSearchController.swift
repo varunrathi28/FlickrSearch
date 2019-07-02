@@ -19,6 +19,10 @@ class ImageSearchController: UIViewController {
     
     //MARK: Variables
     
+    let GRID_PER_LINE = 3
+    let margin:CGFloat  = 16.0
+    
+    
     var currentRequest:URLSessionTask?
     var PAGE_NO = 1
     var PAGINATION_OFFSET = 30
@@ -46,6 +50,15 @@ class ImageSearchController: UIViewController {
         collectionView.delegate = self
         collectionView.dataSource = self
         textfield.delegate = self
+        
+        let collectionViewLayout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout
+        let grid = Grid(columns: GRID_PER_LINE, margins: margin)
+        collectionViewLayout?.sectionInset = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
+        collectionViewLayout?.minimumInteritemSpacing = margin
+        collectionViewLayout?.minimumLineSpacing = margin
+        
+         collectionViewLayout?.itemSize = grid.size(for: view, height: nil,insets:(collectionViewLayout?.sectionInset)!)
+        
     }
     
     func registerNib(){
@@ -157,12 +170,12 @@ extension ImageSearchController:UICollectionViewDataSource,UICollectionViewDeleg
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-    
-        let width =  (UIScreen.main.bounds.size.width)/3 - 8
-        return CGSize(width: width , height: width)
-    }
+//    
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+//    
+//        let width =  (UIScreen.main.bounds.size.width)/3 - 8
+//        return CGSize(width: width , height: width)
+//    }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         let prefetchingRange = datasource.count - PAGINATION_OFFSET

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8B2DB2FA22CB5A0D00583A43 /* Grid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B2DB2F922CB5A0D00583A43 /* Grid.swift */; };
 		8B75E48022C9092D0016C340 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B75E47F22C9092D0016C340 /* Extension.swift */; };
 		8B75E48222C90BC80016C340 /* ImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B75E48122C90BC80016C340 /* ImageService.swift */; };
 		8BB632BF22C6051E00D03617 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB632BE22C6051E00D03617 /* AppDelegate.swift */; };
@@ -22,6 +23,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8B2DB2F922CB5A0D00583A43 /* Grid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Grid.swift; sourceTree = "<group>"; };
 		8B75E47F22C9092D0016C340 /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 		8B75E48122C90BC80016C340 /* ImageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageService.swift; sourceTree = "<group>"; };
 		8BB632BB22C6051E00D03617 /* Search-Image.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Search-Image.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -103,6 +105,7 @@
 				8BB632DB22C606FA00D03617 /* API */,
 				8B75E47F22C9092D0016C340 /* Extension.swift */,
 				8B75E48122C90BC80016C340 /* ImageService.swift */,
+				8B2DB2F922CB5A0D00583A43 /* Grid.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -253,6 +256,7 @@
 				8BB632BF22C6051E00D03617 /* AppDelegate.swift in Sources */,
 				8BB632EC22C60C3700D03617 /* FlickrAPI.swift in Sources */,
 				8BB632EE22C626E400D03617 /* FlickrPhotoModel.swift in Sources */,
+				8B2DB2FA22CB5A0D00583A43 /* Grid.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
