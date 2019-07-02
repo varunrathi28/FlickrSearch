@@ -24,7 +24,7 @@ class ImageDownloader {
     private init() {}
     
     
-     func downloadImage(for photo:FlickrPhotoModel,for indexpath:IndexPath? , completionHandler:@escaping (UIImage?,URL,IndexPath?)->(Void)) -> ImageDownloadTask? {
+    func downloadImage(for photo:FlickrPhotoModel,for indexpath:IndexPath? , completionHandler:@escaping (UIImage?,URL,IndexPath?)->(Void)) -> ImageDownloadTask? {
         
         guard let _ = photo.photoURL else {
             return nil
@@ -37,28 +37,23 @@ class ImageDownloader {
             }
             return nil
         }
+
+        // Checking if the same image is already being downloaded
         
-//        let task = FlickerAPI.fetchPhoto(from: photo) { (image, error) in
-//
-//            if let image  = image {
-//
-//                setCachedImage(image: image, for: photo.imagePath)
-//                DispatchQueue.main.async {
-//                    completionHandler(image)
-//                }
-//            }else {
-//
-//                DispatchQueue.main.async {
-//                    completionHandler(nil)
-//                }
-//            }
-//
-//        }
-
+        if let pendingOperation = (imageDownloadQueue.operations as? [ImageDownloadTask])?.filter({ $0.isFinished == false && $0.isExecuting == true && $0.imageUrl.absoluteString == photo.imagePath
+        }).first {
+            pendingOperation.queuePriority = .veryHigh
+            return pendingOperation
+            
+        }
+        
+        // No Pending downloads exists
+        // Create a new download task
+        
         let operation  = ImageDownloadTask(url: photo.photoURL!, indexPath:indexpath)
-        print("Download operation: \(photo)-\(indexpath?.item)")
+        //print("Download operation: \(photo)-\(indexpath?.item)")
         operation.queuePriority = .veryHigh
-
+        
         operation.completionHandler = {(image, url,newIndexpath,error) in
             
             if let image = image {
@@ -73,6 +68,7 @@ class ImageDownloader {
         
         imageDownloadQueue.addOperation(operation)
         return operation
+        
     }
     
       static  func fetchImageFromCache(for url:String)->UIImage?{
@@ -81,6 +77,11 @@ class ImageDownloader {
             return image
         }
         return nil
+    }
+    
+    
+    func cancelAllDownloads(){
+        imageDownloadQueue.cancelAllOperations()
     }
     
   static func setCachedImage(image:UIImage, for url:String){

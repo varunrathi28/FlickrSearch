@@ -78,7 +78,7 @@ class ImageSearchController: UIViewController {
         // If already requests are going on, cancel them alll
         currentRequest?.cancel()
         datasource = []
-        
+        ImageDownloader.shared.cancelAllDownloads()
         PAGE_NO = 1
         searchPhotos(for: query,page:PAGE_NO)
         
@@ -104,8 +104,6 @@ class ImageSearchController: UIViewController {
                 IndexPath(item: datasourceCount + offset, section: 0)
             }
             
-            
-            
             DispatchQueue.main.async {
                 self.datasource.append(contentsOf: photos)
                 self.collectionView.performBatchUpdates({
@@ -116,12 +114,12 @@ class ImageSearchController: UIViewController {
             
         } else {
             datasource = photos
+            ImageDownloader.shared.cancelAllDownloads()
             DispatchQueue.main.async {
                 self.collectionView.reloadData()
             }
             
         }
     }
-    
 }
 

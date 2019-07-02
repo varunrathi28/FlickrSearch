@@ -13,8 +13,8 @@ import UIKit
 extension ImageSearchController:UICollectionViewDataSource,UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-    
-    let cell = collectionView.dequeueReusableCell(withReuseIdentifier:FlickerImageCell.reuseIdentifier, for: indexPath) as! FlickerImageCell
+        
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier:FlickerImageCell.reuseIdentifier, for: indexPath) as! FlickerImageCell
         let model = datasource[indexPath.row]
         cell.configureImage(with: model,for: indexPath)
         return cell
@@ -27,28 +27,28 @@ extension ImageSearchController:UICollectionViewDataSource,UICollectionViewDeleg
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
-//
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-//
-//        let width =  (UIScreen.main.bounds.size.width)/3 - 8
-//        return CGSize(width: width , height: width)
-//    }
+    //
+    //    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+    //
+    //        let width =  (UIScreen.main.bounds.size.width)/3 - 8
+    //        return CGSize(width: width , height: width)
+    //    }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         let prefetchingRange = datasource.count - PAGINATION_OFFSET
-    
-        if  (prefetchingRange ... datasource.count - 1) ~= indexPath.row{
+        
+        if prefetchingRange > 0 &&  (prefetchingRange ... datasource.count - 1) ~= indexPath.row{
             
             if let lastQuery = lastQuery, currentRequest == nil, PAGE_NO < total_pages  {
-            
+                
                 searchPhotos(for: lastQuery, page:PAGE_NO + 1)
             }
             
         }
+    }
+
 }
-    
-    
-}
+
 
 extension ImageSearchController: UICollectionViewDataSourcePrefetching {
 
