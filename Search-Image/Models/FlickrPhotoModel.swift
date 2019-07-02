@@ -22,11 +22,11 @@ struct PhotoRequestBaseResponse : Codable
 // Mark: Photo Batch Response
 struct PhotoReqestResponse:Codable
 {
-    let photo         :[FlickrPhotoModel]
-    let page          :Int
-    let pages         :Int
-    let perpage       :Int
-    let total         :String
+    var photo         :[FlickrPhotoModel]
+    var page          :Int
+    var pages         :Int
+    var perpage       :Int
+    var total         :String
 }
 
 

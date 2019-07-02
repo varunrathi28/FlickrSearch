@@ -8,8 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		8B2DB2FA22CB5A0D00583A43 /* Grid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B2DB2F922CB5A0D00583A43 /* Grid.swift */; };
-		8B75E48022C9092D0016C340 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B75E47F22C9092D0016C340 /* Extension.swift */; };
-		8B75E48222C90BC80016C340 /* ImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B75E48122C90BC80016C340 /* ImageService.swift */; };
+		8B2DB30722CBF2D600583A43 /* FlickrSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B2DB30622CBF2D600583A43 /* FlickrSearchViewModel.swift */; };
+		8B2DB30922CBFA0100583A43 /* ImageDownloadTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B2DB30822CBFA0100583A43 /* ImageDownloadTask.swift */; };
+		8B2DB30F22CC077900583A43 /* ImageSearchController+CollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B2DB30E22CC077900583A43 /* ImageSearchController+CollectionView.swift */; };
+		8B2DB31122CC07B900583A43 /* ImageSearchController+WebService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B2DB31022CC07B900583A43 /* ImageSearchController+WebService.swift */; };
+		8B2DB31322CC082E00583A43 /* ImageSearchController+TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B2DB31222CC082E00583A43 /* ImageSearchController+TextField.swift */; };
+		8B75E48222C90BC80016C340 /* ImageDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B75E48122C90BC80016C340 /* ImageDownloader.swift */; };
 		8BB632BF22C6051E00D03617 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB632BE22C6051E00D03617 /* AppDelegate.swift */; };
 		8BB632C422C6051E00D03617 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8BB632C222C6051E00D03617 /* Main.storyboard */; };
 		8BB632C622C6052000D03617 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8BB632C522C6052000D03617 /* Assets.xcassets */; };
@@ -24,8 +28,12 @@
 
 /* Begin PBXFileReference section */
 		8B2DB2F922CB5A0D00583A43 /* Grid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Grid.swift; sourceTree = "<group>"; };
-		8B75E47F22C9092D0016C340 /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
-		8B75E48122C90BC80016C340 /* ImageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageService.swift; sourceTree = "<group>"; };
+		8B2DB30622CBF2D600583A43 /* FlickrSearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FlickrSearchViewModel.swift; path = ../../../../FlickrSearchViewModel.swift; sourceTree = "<group>"; };
+		8B2DB30822CBFA0100583A43 /* ImageDownloadTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDownloadTask.swift; sourceTree = "<group>"; };
+		8B2DB30E22CC077900583A43 /* ImageSearchController+CollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ImageSearchController+CollectionView.swift"; sourceTree = "<group>"; };
+		8B2DB31022CC07B900583A43 /* ImageSearchController+WebService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ImageSearchController+WebService.swift"; sourceTree = "<group>"; };
+		8B2DB31222CC082E00583A43 /* ImageSearchController+TextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ImageSearchController+TextField.swift"; sourceTree = "<group>"; };
+		8B75E48122C90BC80016C340 /* ImageDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDownloader.swift; sourceTree = "<group>"; };
 		8BB632BB22C6051E00D03617 /* Search-Image.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Search-Image.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8BB632BE22C6051E00D03617 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8BB632C322C6051E00D03617 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -51,6 +59,46 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8B2DB30422CBF2BB00583A43 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				8B2DB30622CBF2D600583A43 /* FlickrSearchViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		8B2DB30A22CC06FE00583A43 /* Download Task */ = {
+			isa = PBXGroup;
+			children = (
+				8B2DB30822CBFA0100583A43 /* ImageDownloadTask.swift */,
+			);
+			path = "Download Task";
+			sourceTree = "<group>";
+		};
+		8B2DB30B22CC06FE00583A43 /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				8B75E48122C90BC80016C340 /* ImageDownloader.swift */,
+			);
+			path = Manager;
+			sourceTree = "<group>";
+		};
+		8B2DB30C22CC06FE00583A43 /* API Client */ = {
+			isa = PBXGroup;
+			children = (
+				8BB632EB22C60C3700D03617 /* FlickrAPI.swift */,
+			);
+			path = "API Client";
+			sourceTree = "<group>";
+		};
+		8B2DB30D22CC074A00583A43 /* Layout */ = {
+			isa = PBXGroup;
+			children = (
+				8B2DB2F922CB5A0D00583A43 /* Grid.swift */,
+			);
+			path = Layout;
+			sourceTree = "<group>";
+		};
 		8BB632B222C6051E00D03617 = {
 			isa = PBXGroup;
 			children = (
@@ -102,10 +150,8 @@
 		8BB632DA22C606FA00D03617 /* Utility */ = {
 			isa = PBXGroup;
 			children = (
+				8B2DB30D22CC074A00583A43 /* Layout */,
 				8BB632DB22C606FA00D03617 /* API */,
-				8B75E47F22C9092D0016C340 /* Extension.swift */,
-				8B75E48122C90BC80016C340 /* ImageService.swift */,
-				8B2DB2F922CB5A0D00583A43 /* Grid.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -113,8 +159,10 @@
 		8BB632DB22C606FA00D03617 /* API */ = {
 			isa = PBXGroup;
 			children = (
+				8B2DB30C22CC06FE00583A43 /* API Client */,
+				8B2DB30A22CC06FE00583A43 /* Download Task */,
+				8B2DB30B22CC06FE00583A43 /* Manager */,
 				8BB632E922C60C0300D03617 /* API.swift */,
-				8BB632EB22C60C3700D03617 /* FlickrAPI.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -137,17 +185,13 @@
 		8BB632DE22C606FA00D03617 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				8BB632DF22C606FA00D03617 /* ViewModels */,
+				8B2DB30422CBF2BB00583A43 /* ViewModels */,
 				8BB632E722C6088F00D03617 /* ImageSearchController.swift */,
+				8B2DB30E22CC077900583A43 /* ImageSearchController+CollectionView.swift */,
+				8B2DB31022CC07B900583A43 /* ImageSearchController+WebService.swift */,
+				8B2DB31222CC082E00583A43 /* ImageSearchController+TextField.swift */,
 			);
 			path = ViewControllers;
-			sourceTree = "<group>";
-		};
-		8BB632DF22C606FA00D03617 /* ViewModels */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = ViewModels;
 			sourceTree = "<group>";
 		};
 		8BB632E022C606FA00D03617 /* Views */ = {
@@ -248,14 +292,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8B2DB31122CC07B900583A43 /* ImageSearchController+WebService.swift in Sources */,
 				8BB632E822C6088F00D03617 /* ImageSearchController.swift in Sources */,
-				8B75E48222C90BC80016C340 /* ImageService.swift in Sources */,
+				8B75E48222C90BC80016C340 /* ImageDownloader.swift in Sources */,
 				8BB632E622C6079B00D03617 /* FlickerImageCell.swift in Sources */,
-				8B75E48022C9092D0016C340 /* Extension.swift in Sources */,
+				8B2DB30722CBF2D600583A43 /* FlickrSearchViewModel.swift in Sources */,
 				8BB632EA22C60C0300D03617 /* API.swift in Sources */,
+				8B2DB31322CC082E00583A43 /* ImageSearchController+TextField.swift in Sources */,
 				8BB632BF22C6051E00D03617 /* AppDelegate.swift in Sources */,
 				8BB632EC22C60C3700D03617 /* FlickrAPI.swift in Sources */,
 				8BB632EE22C626E400D03617 /* FlickrPhotoModel.swift in Sources */,
+				8B2DB30922CBFA0100583A43 /* ImageDownloadTask.swift in Sources */,
+				8B2DB30F22CC077900583A43 /* ImageSearchController+CollectionView.swift in Sources */,
 				8B2DB2FA22CB5A0D00583A43 /* Grid.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

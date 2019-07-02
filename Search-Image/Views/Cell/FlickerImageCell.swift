@@ -15,7 +15,7 @@ class FlickerImageCell: UICollectionViewCell {
     @IBOutlet weak var activityIndicator:UIActivityIndicatorView!
     
     //MARK: variables
-    var currentReqest:URLSessionTask?
+    var currentReqest:ImageDownloadTask?
     
     
     class var reuseIdentifier: String {
@@ -23,7 +23,7 @@ class FlickerImageCell: UICollectionViewCell {
     }
     
     
-    func configureImage(with model:FlickrPhotoModel?){
+    func configureImage(with model:FlickrPhotoModel?,for indexpath:IndexPath){
         currentReqest?.cancel()
         
         activityIndicator.isHidden = false
@@ -31,18 +31,14 @@ class FlickerImageCell: UICollectionViewCell {
         
         if let model = model {
             
-            // Use the cached image
-            
             DispatchQueue.global().async {
                 
-                self.currentReqest = ImageDownloader.downloadImage(for: model, completionHandler: {[weak self] (downloadedImage) -> (Void) in
-                    
+                self.currentReqest = ImageDownloader.shared.downloadImage(for: model,for: indexpath,  completionHandler: {[weak self] (downloadedImage, url, indexpathh) -> (Void) in
                     withExtendedLifetime(self) {
-                        self!.currentReqest = nil
                         self!.activityIndicator.isHidden = true
                         self!.activityIndicator.stopAnimating()
                         
-                        if let image = downloadedImage {
+                        if let image = downloadedImage,indexpathh == indexpath  {
                             self!.flickrImage.image = image
                         }
                     }
