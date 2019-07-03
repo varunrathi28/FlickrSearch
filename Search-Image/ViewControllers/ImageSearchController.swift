@@ -23,6 +23,7 @@ class ImageSearchController: UIViewController {
     let margin:CGFloat  = 16.0
     
     
+    var previousPreheatRect:CGRect = CGRect.zero
     var currentRequest:URLSessionTask?
     var PAGE_NO = 1
     var PAGINATION_OFFSET = 30
@@ -37,6 +38,11 @@ class ImageSearchController: UIViewController {
         setUpViews()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        updateCachedAssets()
+    }
+    
     
     func setUpViews(){
         setupCollectionView()
@@ -46,6 +52,7 @@ class ImageSearchController: UIViewController {
     
     func setupCollectionView(){
         
+        collectionView.keyboardDismissMode = .onDrag
         collectionView.prefetchDataSource = self
         collectionView.delegate = self
         collectionView.dataSource = self
@@ -74,7 +81,8 @@ class ImageSearchController: UIViewController {
             return
         }
         
-        
+        view.endEditing(true)
+    
         // If already requests are going on, cancel them alll
         currentRequest?.cancel()
         datasource = []

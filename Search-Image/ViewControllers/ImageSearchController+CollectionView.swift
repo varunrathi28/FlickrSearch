@@ -47,6 +47,10 @@ extension ImageSearchController:UICollectionViewDataSource,UICollectionViewDeleg
         }
     }
 
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        updateCachedAssets()
+}
+
 }
 
 
