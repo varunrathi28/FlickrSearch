@@ -10,10 +10,15 @@ import UIKit
 
 class ImageDownloader {
 
-    static let imageCache = NSCache<NSString, UIImage>()
+    static var imageCache :NSCache<NSString, UIImage> {
+        let cache = NSCache<NSString,UIImage>()
+        // Cache of 20 MB
+        cache.totalCostLimit = 20*1024*1024
+        cache.countLimit = 200
+        return cache
+    }
 
     lazy var imageDownloadQueue:OperationQueue = {
-    
     let queue = OperationQueue()
     queue.name = "com.search-image.imagedownload"
     queue.qualityOfService  = .userInteractive
@@ -37,7 +42,7 @@ class ImageDownloader {
             }
             return nil
         }
-
+        
         // Checking if the same image is already being downloaded
         
         if let pendingOperation = (imageDownloadQueue.operations as? [ImageDownloadTask])?.filter({ $0.isFinished == false && $0.isExecuting == true && $0.imageUrl.absoluteString == photo.imagePath
@@ -65,11 +70,23 @@ class ImageDownloader {
             }
             
         }
-        
         imageDownloadQueue.addOperation(operation)
-        return operation
+        print("operation: count - \(imageDownloadQueue.operations.count)")
+      //  return operation
+      return operation
         
     }
+    
+    func reduceImageDownloadPriority(for photo:FlickrPhotoModel) {
+        
+        if let  pendingOperation = (imageDownloadQueue.operations as! [ImageDownloadTask]).filter({ $0.isExecuting == true && $0.isFinished == false && $0.imageUrl.absoluteString == photo.imagePath
+        }).first {
+        
+            pendingOperation.queuePriority = .low
+        }
+        
+    }
+    
     
       static  func fetchImageFromCache(for url:String)->UIImage?{
         if let image = imageCache.object(forKey: url as NSString){
