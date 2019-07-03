@@ -1,4 +1,3 @@
-# FlickrSearch
 
 # Flickr Search
 iOS App for searching images using Flickr API. Type the query on the search bar, the resupts are automatically populated.
