@@ -13,6 +13,7 @@ extension ImageSearchController {
 
      func updateCachedAssets() {
     
+        return
         // Update only if the view is visible.
         guard isViewLoaded && view.window != nil else { return }
         
